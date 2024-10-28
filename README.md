@@ -6,7 +6,7 @@ Pour utiliser ce template, veuillez d'abord construire un environnement virtuel:
 ```
 python3 -m venv <my-env>
 
-source <my-env>/Scripts/activate
+source <my-env>/bin/activate
 ```
 
 Puis installer les dépendances: 
