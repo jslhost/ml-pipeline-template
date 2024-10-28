@@ -11,7 +11,9 @@ source <my-env>/bin/activate
 
 Puis installer les dépendances: 
 ```
-pip install -r requirements.txt
+pip install pandas
+
+pip install -U scikit-learn
 ```
 
 Veillez à ce que Make soit installé, et vous pouvez maintenant lancer la commande suivante:
