@@ -8,10 +8,12 @@ from sklearn.svm import SVC
 
 def training():
     df = pd.read_csv("data/clean_dataset.csv")
-    y = df['Exited']
+    y = df["Exited"]
     X = sparse.load_npz("data/preprocessed_features.npz")
 
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, stratify=y, random_state=42)
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=0.2, stratify=y, random_state=42
+    )
 
     svc = SVC()
 
@@ -21,5 +23,5 @@ def training():
         dump(svc, f, protocol=5)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     training()
