@@ -10,16 +10,16 @@ data:
 	mkdir data
 
 data/raw_dataset.csv: data
-	python3 load_data.py
+	python load_data.py
 
 data/clean_dataset.csv: data/raw_dataset.csv
-	python3 clean_data.py
+	python clean_data.py
 
 data/preprocessed_features.npz: data/clean_dataset.csv
-	python3 preprocess_data.py
+	python preprocess_data.py
 
 model.pkl: data/preprocessed_features.npz
-	python3 training.py
+	python training.py
 
 predictions: model.pkl
-	python3 predict.py
+	python predict.py
