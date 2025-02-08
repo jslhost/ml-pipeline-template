@@ -1,4 +1,4 @@
-# ml_pipeline_template
+# ml-pipeline-template
 Un template de pipeline de données pour faire du Machine Learning (avec make).<br><br>
 
 ## Sommaire
