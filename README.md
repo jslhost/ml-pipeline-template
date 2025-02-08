@@ -3,9 +3,8 @@ Un template de pipeline de données pour faire du Machine Learning (avec make).<
 
 ## Sommaire
 1. [Guide d'installation de make](#guide-dinstallation-de-make)
-   - [Sous macOS](#sous-macos)
-   - [Sous Windows](#sous-windows)
-2. [Utilisation du template](#utilisation-du-template)<br><br>
+2. [Utilisation du template](#utilisation-du-template)
+<br><br>
 
 ## Guide d'installation de make
 Pour commencer, il faut d'abord installer make sur sa machine. Voici un guide d'installation :
