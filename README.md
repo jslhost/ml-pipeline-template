@@ -91,9 +91,9 @@ pip install -U scikit-learn
 Enfin, on clone le repo:
 
 ```bash
-git clone git@github.com:jslhost/ml_pipeline_template.git # ou avec HTTPS
+git clone git@github.com:jslhost/ml-pipeline-template.git # ou avec HTTPS
 
-cd ml_pipeline_template
+cd ml-pipeline-template
 ```
 
 Veillez à ce que make soit installé, et vous pouvez maintenant lancer la commande suivante:
