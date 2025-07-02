@@ -9,7 +9,7 @@ model: model.pkl
 data:
 	mkdir data
 
-data/raw_dataset.csv: data
+data/raw_dataset.csv: | data
 	python load_data.py
 
 data/clean_dataset.csv: data/raw_dataset.csv
