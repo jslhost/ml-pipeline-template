@@ -23,4 +23,4 @@ model.pkl: data/preprocessed_features.npz
 
 evaluations: model.pkl 
 	mkdir -p reports
-	python evaluate.py > reports/classification-report.txt
+	python evaluate.py

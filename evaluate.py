@@ -3,6 +3,8 @@ from scipy import sparse
 from pickle import load
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+import matplotlib.pyplot as plt
 
 
 def evaluate():
@@ -18,7 +20,22 @@ def evaluate():
         svc = load(f)
 
     y_test_pred = svc.predict(X_test)
-    print(classification_report(y_test, y_test_pred))
+
+    clf_report = classification_report(y_test, y_test_pred)
+
+    cm = confusion_matrix(y_test, y_test_pred, labels=svc.classes_)
+    disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=svc.classes_)
+
+    # Afficher et sauvegarder
+    with open("reports/classification-report.txt", "w") as f:
+        f.write(clf_report)
+
+    disp.plot()
+    plt.savefig("reports/confusion-matrix.png")
+    plt.close()
+
+    print("Rapport sauvegardé dans reports/classification-report.txt")
+    print("Matrice de confusion sauvegardée dans reports/confusion-matrix.jpg")
 
 
 if __name__ == "__main__":

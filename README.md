@@ -61,11 +61,12 @@ brew install make
     Si Chocolatey est correctement installé, vous verrez s’afficher l’aide de la commande.
 
 5.  **Utiliser Chocolatey**
-        Une fois installé, vous pouvez installer make en utilisant la commande :
+    Une fois installé, vous pouvez installer make en utilisant la commande :
 
         ```powershell
         choco install make
         ```
+
     <br><br>
 
 ## Utilisation du template
@@ -86,6 +87,8 @@ Puis installer les dépendances:
 pip install pandas
 
 pip install -U scikit-learn
+
+pip install matplotlib
 ```
 
 Enfin, on clone le repo:
