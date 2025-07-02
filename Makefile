@@ -21,5 +21,5 @@ data/preprocessed_features.npz: data/clean_dataset.csv
 model.pkl: data/preprocessed_features.npz
 	python training.py
 
-predictions: model.pkl
-	python predict.py
+evaluations: model.pkl
+	python evaluate.py
