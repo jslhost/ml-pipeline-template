@@ -1,6 +1,6 @@
 # ml-pipeline-template
 
-Un template de pipeline de données pour faire du Machine Learning (avec make).<br><br>
+Un template de pipeline de données pour faire du Machine Learning (avec make). Ce template est orienté pour la classification mais peut facilement être adapté à la régression.<br><br>
 
 ## Sommaire
 
