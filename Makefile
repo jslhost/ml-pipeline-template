@@ -2,7 +2,7 @@ SHELL := bash
 .ONESHELL:
 .SHELLFLAGS := -eu -o pipefail -c
 
-.PHONY: model predictions
+.PHONY: model evaluations
 
 model: model.pkl
 
@@ -21,5 +21,6 @@ data/preprocessed_features.npz: data/clean_dataset.csv
 model.pkl: data/preprocessed_features.npz
 	python training.py
 
-evaluations: model.pkl
-	python evaluate.py
+evaluations: model.pkl 
+	mkdir -p reports
+	python evaluate.py > reports/classification-report.txt
