@@ -63,9 +63,9 @@ brew install make
 5.  **Utiliser Chocolatey**
     Une fois installé, vous pouvez installer make en utilisant la commande :
 
-        ```powershell
-        choco install make
-        ```
+     ```powershell
+     choco install make
+     ```
 
     <br><br>
 
