@@ -84,11 +84,7 @@ source <my-env>/bin/activate # avec git bash
 Puis installer les dépendances:
 
 ```bash
-pip install pandas
-
-pip install -U scikit-learn
-
-pip install matplotlib
+pip install -r requirements.txt
 ```
 
 Enfin, on clone le repo:
