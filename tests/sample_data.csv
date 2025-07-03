@@ -1,0 +1,9 @@
+RowNumber,CustomerId,Surname,CreditScore,Geography,Gender,Age,Tenure,Balance,NumOfProducts,HasCrCard,IsActiveMember,EstimatedSalary,Exited
+1,15634602,Hargrave,619,France,Female,42,2,0.0,1,1,1,101348.88,1
+2,15647311,Hill,608,Spain,Female,41,1,83807.86,1,0,1,112542.58,0
+3,15619304,Onoseke,502,France,Male,42,8,1099.68,3,1,1,1355.95,1
+4,15701354,Smith,651,Germany,Male,50,5,50000.00,2,1,0,123456.78,0
+5,15701355,Brown,600,France,Female,30,3,2000.00,1,1,1,40000.00,1
+6,15701356,Taylor,630,Germany,Female,40,6,3000.00,2,1,1,50000.00,0
+7,15701357,Wilson,680,Spain,Male,36,4,1200.00,2,0,1,60000.00,1
+8,15701358,Johnson,590,France,Male,29,2,0.00,1,1,0,70000.00,0

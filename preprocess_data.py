@@ -8,8 +8,10 @@ from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.compose import ColumnTransformer, make_column_selector
 
 
-def preprocess_data():
-    df = pd.read_csv("data/clean_dataset.csv")
+def preprocess_data(src: str = "data/clean_dataset.csv", dest: str = "data/preprocessed_features.npz"):
+    """Preprocess features and save them as a sparse matrix."""
+
+    df = pd.read_csv(src)
     X = df.drop("Exited", axis=1)
 
     numeric_transformer = Pipeline(
@@ -37,7 +39,7 @@ def preprocess_data():
 
     X_preprocessed = pipeline.fit_transform(X)
 
-    sparse.save_npz("data/preprocessed_features.npz", X_preprocessed)
+    sparse.save_npz(dest, X_preprocessed)
 
 
 if __name__ == "__main__":
