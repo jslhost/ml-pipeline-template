@@ -32,14 +32,12 @@ def preprocess_data(src: str = "data/clean_dataset.csv", dest: str = "data/prepr
                 categorical_transformer,
                 make_column_selector(dtype_include=object),
             ),
-        ],
-        sparse_threshold=0.0,
+        ]
     )
 
     pipeline = Pipeline(steps=[("preprocessor", preprocessor)])
 
     X_preprocessed = pipeline.fit_transform(X)
-    X_preprocessed = sparse.csr_matrix(X_preprocessed)
 
     sparse.save_npz(dest, X_preprocessed)
 
