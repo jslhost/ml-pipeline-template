@@ -81,19 +81,20 @@ python -m venv <my-env> # modifier le nom de l'environnement
 source <my-env>/bin/activate # avec git bash
 ```
 
-Puis installer les dépendances:
-
-```bash
-pip install -r requirements.txt
-```
-
-Enfin, on clone le repo:
+On clone le repo:
 
 ```bash
 git clone git@github.com:jslhost/ml-pipeline-template.git # ou avec HTTPS
 
 cd ml-pipeline-template
 ```
+
+Puis on installe les dépendances:
+
+```bash
+pip install -r requirements.txt
+```
+
 
 Veillez à ce que make soit installé, et vous pouvez maintenant lancer la commande suivante:
 
