@@ -7,16 +7,24 @@ from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 import matplotlib.pyplot as plt
 
 
-def evaluate():
-    df = pd.read_csv("data/clean_dataset.csv")
+def evaluate(
+    data_csv: str = "data/clean_dataset.csv",
+    features_file: str = "data/preprocessed_features.npz",
+    model_path: str = "model.pkl",
+    report_path: str = "reports/classification-report.txt",
+    matrix_path: str = "reports/confusion-matrix.png",
+):
+    """Evaluate the trained model and save evaluation artefacts."""
+
+    df = pd.read_csv(data_csv)
     y = df["Exited"]
-    X = sparse.load_npz("data/preprocessed_features.npz")
+    X = sparse.load_npz(features_file)
 
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=0.2, stratify=y, random_state=42
     )
 
-    with open("model.pkl", "rb") as f:
+    with open(model_path, "rb") as f:
         svc = load(f)
 
     y_test_pred = svc.predict(X_test)
@@ -27,11 +35,11 @@ def evaluate():
     disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=svc.classes_)
 
     # Afficher et sauvegarder
-    with open("reports/classification-report.txt", "w") as f:
+    with open(report_path, "w") as f:
         f.write(clf_report)
 
     disp.plot()
-    plt.savefig("reports/confusion-matrix.png")
+    plt.savefig(matrix_path)
     plt.close()
 
     print("Rapport sauvegardé dans reports/classification-report.txt")
