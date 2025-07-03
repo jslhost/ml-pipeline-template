@@ -35,7 +35,7 @@ def evaluate():
     plt.close()
 
     print("Rapport sauvegardé dans reports/classification-report.txt")
-    print("Matrice de confusion sauvegardée dans reports/confusion-matrix.jpg")
+    print("Matrice de confusion sauvegardée dans reports/confusion-matrix.png")
 
 
 if __name__ == "__main__":
