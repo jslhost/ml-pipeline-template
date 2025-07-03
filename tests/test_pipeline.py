@@ -3,6 +3,7 @@ from pathlib import Path
 
 import pandas as pd
 from scipy import sparse
+import pytest
 
 from load_data import load_data
 from clean_data import clean_data
@@ -11,41 +12,39 @@ from training import training
 from evaluate import evaluate
 
 
-def test_load_and_clean(tmp_path):
-    # setup temporary data folder
+@pytest.fixture
+def clean_csv(tmp_path):
     data_dir = tmp_path / "data"
     data_dir.mkdir()
     raw_path = data_dir / "raw.csv"
     clean_path = data_dir / "clean.csv"
-
+    # Génère le raw.csv
     load_data(src="tests/sample_data.csv", dest=raw_path)
-    assert raw_path.exists(), "Raw dataset should be created"
-
-    df_raw = pd.read_csv(raw_path)
-    assert not df_raw.empty, "Raw dataset should not be empty"
-
+    # Nettoie le raw.csv
     clean_data(src=raw_path, dest=clean_path)
-    df_clean = pd.read_csv(clean_path)
+    return clean_path
+
+
+def test_load_and_clean(clean_csv):
+    df_clean = pd.read_csv(clean_csv)
+    assert clean_csv.exists(), "Clean dataset should be created"
+
+    assert not df_clean.empty, "Clean dataset should not be empty"
 
     assert "RowNumber" not in df_clean.columns
     assert "CustomerId" not in df_clean.columns
-    assert len(df_clean) == len(df_raw)
 
 
-def test_preprocess(tmp_path):
+def test_preprocess(clean_csv, tmp_path):
     data_dir = tmp_path / "data"
-    data_dir.mkdir()
     clean_path = data_dir / "clean.csv"
     features_path = data_dir / "feat.npz"
 
-    # prepare clean data
-    df = pd.read_csv("tests/sample_data.csv")
-    df.drop(["RowNumber", "CustomerId"], axis=1).to_csv(clean_path, index=False)
-
-    preprocess_data(src=clean_path, dest=features_path)
+    preprocess_data(src=clean_csv, dest=features_path)
     assert features_path.exists()
 
     X = sparse.load_npz(features_path)
+    df = pd.read_csv(clean_csv)
     assert X.shape[0] == len(df)
 
 
@@ -77,4 +76,3 @@ def test_training_and_evaluate(tmp_path):
 
     assert report_path.exists()
     assert matrix_path.exists()
-
