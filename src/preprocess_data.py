@@ -7,14 +7,17 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.compose import ColumnTransformer, make_column_selector
 
+from src.utils import load_params
 
-def preprocess_data(
-    src: str = "data/clean_dataset.csv", dest: str = "data/preprocessed_features.npz"
-):
+
+def preprocess_data(params: dict):
     """Preprocess features and save them as a sparse matrix."""
+    src = params["data"]["clean_dataset_path"]
+    dest = params["data"]["preprocessed_features_path"]
+    target_column = params["base"]["target_column"]
 
     df = pd.read_csv(src)
-    X = df.drop("Exited", axis=1)
+    X = df.drop(target_column, axis=1)
 
     numeric_transformer = Pipeline(
         steps=[
@@ -45,4 +48,5 @@ def preprocess_data(
 
 
 if __name__ == "__main__":
-    preprocess_data()
+    params = load_params()
+    preprocess_data(params)

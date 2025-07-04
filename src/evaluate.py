@@ -7,6 +7,8 @@ from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 import matplotlib.pyplot as plt
 import os
 
+from src.utils import load_params
+
 
 def get_next_version_path(path: str) -> str:
     """
@@ -25,21 +27,24 @@ def get_next_version_path(path: str) -> str:
         version += 1
 
 
-def evaluate(
-    data_csv: str = "data/clean_dataset.csv",
-    features_file: str = "data/preprocessed_features.npz",
-    model_path: str = "model.pkl",
-    report_path: str = "reports/classification-report.txt",
-    matrix_path: str = "reports/confusion-matrix.png",
-):
+def evaluate(params: dict):
     """Evaluate the trained model and save evaluation artefacts."""
+    data_csv = params["data"]["clean_dataset_path"]
+    features_file = params["data"]["preprocessed_features_path"]
+    model_path = params["model"]["path"]
+    report_path = params["reports"]["classification_report_path"]
+    matrix_path = params["reports"]["confusion_matrix_path"]
+    target_column = params["base"]["target_column"]
+    test_size = params["base"]["test_size"]
+    random_state = params["base"]["random_state"]
+    reports_dir = params["reports"]["dir"]
 
     df = pd.read_csv(data_csv)
-    y = df["Exited"]
+    y = df[target_column]
     X = sparse.load_npz(features_file)
 
     X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=0.2, stratify=y, random_state=42
+        X, y, test_size=test_size, stratify=y, random_state=random_state
     )
 
     with open(model_path, "rb") as f:
@@ -51,6 +56,9 @@ def evaluate(
 
     cm = confusion_matrix(y_test, y_test_pred, labels=svc.classes_)
     disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=svc.classes_)
+
+    # Ensure reports directory exists
+    os.makedirs(reports_dir, exist_ok=True)
 
     # Get versioned paths for report and matrix
     versioned_report_path = get_next_version_path(report_path)
@@ -69,4 +77,5 @@ def evaluate(
 
 
 if __name__ == "__main__":
-    evaluate()
+    params = load_params()
+    evaluate(params)

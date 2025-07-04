@@ -1,22 +1,22 @@
 import pandas as pd
+from src.utils import load_params
 
-data_link = "https://raw.githubusercontent.com/jslhost/dataset_repo/refs/heads/main/Churn_Modelling.csv"
 
-
-def load_data(src: str = data_link, dest: str = "data/raw_dataset.csv"):
+def load_data(params: dict):
     """Load the dataset from ``src`` and save it to ``dest``.
 
     Parameters
     ----------
-    src: str
-        Path or URL to the CSV file to load.
-    dest: str
-        Path of the CSV file to write.
+    params: dict
+        Dictionary containing parameters for data loading.
     """
+    data_link = params["data"]["raw_data_link"]
+    dest = params["data"]["raw_dataset_path"]
 
-    df = pd.read_csv(src)
+    df = pd.read_csv(data_link)
     df.to_csv(dest, index=False)
 
 
 if __name__ == "__main__":
-    load_data()
+    params = load_params()
+    load_data(params)

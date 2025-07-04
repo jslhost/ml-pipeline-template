@@ -10,17 +10,17 @@ data:
 	mkdir data
 
 data/raw_dataset.csv: | data
-	python src/load_data.py
+	PYTHONPATH=. python src/load_data.py
 
 data/clean_dataset.csv: data/raw_dataset.csv
-	python src/clean_data.py
+	PYTHONPATH=. python src/clean_data.py
 
 data/preprocessed_features.npz: data/clean_dataset.csv
-	python src/preprocess_data.py
+	PYTHONPATH=. python src/preprocess_data.py
 
 model.pkl: data/preprocessed_features.npz
-	python src/training.py
+	PYTHONPATH=. python src/training.py
 
 evaluations: model.pkl 
 	mkdir -p reports
-	python src/evaluate.py
+	PYTHONPATH=. python src/evaluate.py
