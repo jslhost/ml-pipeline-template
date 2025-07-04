@@ -5,6 +5,24 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 import matplotlib.pyplot as plt
+import os
+
+
+def get_next_version_path(path: str) -> str:
+    """
+    Finds the next available versioned path for a file.
+    Example: 'reports/file.txt' -> 'reports/file-1.txt' if 'file.txt' exists.
+    """
+    if not os.path.exists(path):
+        return path
+
+    base, ext = os.path.splitext(path)
+    version = 1
+    while True:
+        new_path = f"{base}-{version}{ext}"
+        if not os.path.exists(new_path):
+            return new_path
+        version += 1
 
 
 def evaluate(
@@ -34,16 +52,20 @@ def evaluate(
     cm = confusion_matrix(y_test, y_test_pred, labels=svc.classes_)
     disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=svc.classes_)
 
-    # Afficher et sauvegarder
-    with open(report_path, "w") as f:
+    # Get versioned paths for report and matrix
+    versioned_report_path = get_next_version_path(report_path)
+    versioned_matrix_path = get_next_version_path(matrix_path)
+
+    # Save artifacts
+    with open(versioned_report_path, "w") as f:
         f.write(clf_report)
 
     disp.plot()
-    plt.savefig(matrix_path)
+    plt.savefig(versioned_matrix_path)
     plt.close()
 
-    print("Rapport sauvegardé dans reports/classification-report.txt")
-    print("Matrice de confusion sauvegardée dans reports/confusion-matrix.png")
+    print(f"Rapport sauvegardé dans {versioned_report_path}")
+    print(f"Matrice de confusion sauvegardée dans {versioned_matrix_path}")
 
 
 if __name__ == "__main__":
