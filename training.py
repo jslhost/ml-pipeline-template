@@ -6,7 +6,11 @@ from sklearn.model_selection import train_test_split
 from sklearn.svm import SVC
 
 
-def training(data_csv: str = "data/clean_dataset.csv", features_file: str = "data/preprocessed_features.npz", model_path: str = "model.pkl"):
+def training(
+    data_csv: str = "data/clean_dataset.csv",
+    features_file: str = "data/preprocessed_features.npz",
+    model_path: str = "model.pkl",
+):
     """Train a SVC model and save it to ``model_path``."""
 
     df = pd.read_csv(data_csv)
