@@ -17,9 +17,9 @@ Ce projet fournit un pipeline de Machine Learning structuré, orchestré par `ma
 
 *   `load_data.py`: Charge les données brutes.
 *   `clean_data.py`: Nettoie les données chargées.
-*   `preprocess_data.py`: Prétraite les données nettoyées (par exemple, mise à l'échelle, encodage).
+*   `preprocess_data.py`: Prétraite les données nettoyées.
 *   `training.py`: Entraîne le modèle de Machine Learning.
-*   `evaluate.py`: Évalue les performances du modèle.
+*   `evaluate.py`: Évalue les performances du modèle (crée matrice de confusion et classification report).
 
 Le `Makefile` définit les dépendances entre ces étapes, garantissant que chaque étape est exécutée dans le bon ordre et que seules les étapes nécessaires sont relancées lorsque les fichiers sources changent.
 
@@ -65,8 +65,6 @@ brew install make
     Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
     ```
 
-    L’installation se déroulera automatiquement. Attendez quelques instants jusqu’à ce que le script ait terminé.
-
 4.  **Vérifier l’installation**
 
     Fermez puis rouvrez PowerShell (en mode normal suffit désormais) et tapez :
@@ -77,8 +75,9 @@ brew install make
 
     Si Chocolatey est correctement installé, vous verrez s’afficher l’aide de la commande.
 
-5.  **Utiliser Chocolatey**
-    Une fois installé, vous pouvez installer make en utilisant la commande :
+5.  **Installer Maker**
+   
+    Vous pouvez installer make en utilisant la commande :
 
     ```powershell
     choco install make
@@ -91,23 +90,23 @@ Pour utiliser ce template, suivez les étapes ci-dessous :
 1.  **Cloner le dépôt :**
 
     ```bash
-git clone git@github.com:jslhost/ml-pipeline-template.git # ou avec HTTPS
-cd ml-pipeline-template
+    git clone git@github.com:jslhost/ml-pipeline-template.git # ou avec HTTPS
+    cd ml-pipeline-template
     ```
 
 2.  **Créer et activer un environnement virtuel :**
 
     ```bash
-python -m venv <my-env> # modifier le nom de l'environnement
-source <my-env>/bin/activate # Sous Linux/macOS
-# Pour Windows (PowerShell):
-# .\<my-env>\Scripts\Activate.ps1
+    python -m venv <my-env> # modifier le nom de l'environnement
+    source <my-env>/bin/activate # Sous Linux/macOS
+    # Pour Windows (PowerShell):
+    # .\<my-env>\Scripts\Activate.ps1
     ```
 
 3.  **Installer les dépendances :**
 
     ```bash
-pip install -r requirements.txt
+    pip install -r requirements.txt
     ```
 
 4.  **Exécuter le pipeline avec `make` :**
@@ -117,7 +116,7 @@ pip install -r requirements.txt
     *   **Exécuter le pipeline complet et évaluer le modèle :**
 
         ```bash
-make evaluations
+        make evaluations
         ```
 
         Cette commande va exécuter toutes les étapes nécessaires : chargement des données, nettoyage, prétraitement, entraînement du modèle et évaluation.
@@ -125,37 +124,34 @@ make evaluations
     *   **Entraîner le modèle uniquement :**
 
         ```bash
-make model
+        make model
         ```
 
     *   **Générer les données brutes :**
 
         ```bash
-make data/raw_dataset.csv
+        make data/raw_dataset.csv
         ```
 
     *   **Nettoyer les données :**
 
         ```bash
-make data/clean_dataset.csv
+        make data/clean_dataset.csv
         ```
 
     *   **Prétraiter les données :**
 
         ```bash
-make data/preprocessed_features.npz
+        make data/preprocessed_features.npz
         ```
 
 ## Configuration avec `params.yaml`
 
 Le fichier `params.yaml` contient les paramètres configurables pour les différentes étapes du pipeline. Vous pouvez modifier ce fichier pour ajuster les hyperparamètres du modèle, les chemins de fichiers, ou d'autres configurations spécifiques à votre cas d'utilisation.
 
-Exemple de paramètres que vous pourriez trouver :
-
-
 ## Tests
 
-Le projet inclut des tests unitaires et d'intégration dans le répertoire `tests/`. Pour exécuter les tests, assurez-vous d'avoir installé `pytest` (inclus dans `requirements.txt`) et exécutez la commande suivante à la racine du projet :
+Le projet inclut des tests dans le répertoire `tests/`. Pour exécuter les tests, assurez-vous d'avoir installé `pytest` (inclus dans `requirements.txt`) et exécutez la commande suivante à la racine du projet :
 
 ```bash
 pytest
@@ -169,7 +165,7 @@ Un `Dockerfile` est fourni pour conteneuriser l'application. Cela permet de cré
 docker build -t ml-pipeline-template .
 ```
 
-Une fois l'image construite, vous pouvez l'exécuter. Par exemple, pour tester les évaluations :
+Une fois l'image construite, vous pouvez l'exécuter pour tester les évaluations :
 
 ```bash
 docker run --rm ml-pipeline-template
