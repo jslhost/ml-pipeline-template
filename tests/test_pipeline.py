@@ -2,11 +2,11 @@ import pandas as pd
 from scipy import sparse
 import pytest
 
-from load_data import load_data
-from clean_data import clean_data
-from preprocess_data import preprocess_data
-from training import training
-from evaluate import evaluate
+from src.load_data import load_data
+from src.clean_data import clean_data
+from src.preprocess_data import preprocess_data
+from src.training import training
+from src.evaluate import evaluate
 
 
 @pytest.fixture
