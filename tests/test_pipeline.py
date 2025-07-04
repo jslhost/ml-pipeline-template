@@ -1,6 +1,3 @@
-import os
-from pathlib import Path
-
 import pandas as pd
 from scipy import sparse
 import pytest
@@ -37,7 +34,6 @@ def test_load_and_clean(clean_csv):
 
 def test_preprocess(clean_csv, tmp_path):
     data_dir = tmp_path / "data"
-    clean_path = data_dir / "clean.csv"
     features_path = data_dir / "feat.npz"
 
     preprocess_data(src=clean_csv, dest=features_path)
