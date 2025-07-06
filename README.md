@@ -1,3 +1,5 @@
+[![publish-docker-image](https://github.com/jslhost/ml-pipeline-template/actions/workflows/prod.yml/badge.svg)](https://github.com/jslhost/ml-pipeline-template/actions/workflows/prod.yml)
+
 # ml-pipeline-template
 
 Un template de pipeline de données pour faire du Machine Learning (avec make). Ce template est orienté pour la classification mais peut facilement être adapté à la régression.
