@@ -1,4 +1,4 @@
-[![publish-docker-image](https://github.com/jslhost/ml-pipeline-template/actions/workflows/prod.yml/badge.svg)](https://github.com/jslhost/ml-pipeline-template/actions/workflows/prod.yml)
+[![CI/CD Pipeline](https://github.com/jslhost/ml-pipeline-template/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/jslhost/ml-pipeline-template/actions/workflows/ci.yml)
 
 # ml-pipeline-template
 
