@@ -16,3 +16,4 @@ COPY . .
 
 # Commande par défaut pour exécuter le pipeline
 CMD ["make", "evaluations"]
+CMD ["cat", "reports/classification-report.txt"]
