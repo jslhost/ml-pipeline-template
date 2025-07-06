@@ -15,5 +15,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Commande par défaut pour exécuter le pipeline
-CMD ["make", "evaluations"]
-CMD ["cat", "reports/classification-report.txt"]
+CMD ["sh", "-c", "make evaluations && cat reports/classification-report.txt"]
+
