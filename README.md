@@ -1,4 +1,5 @@
 [![CI/CD Pipeline](https://github.com/jslhost/ml-pipeline-template/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/jslhost/ml-pipeline-template/actions/workflows/ci.yml)
+[![Docker Pulls](https://img.shields.io/docker/pulls/jslhostdocker/ml-pipeline-template.svg)](https://hub.docker.com/r/jslhostdocker/ml-pipeline-template)
 
 # ml-pipeline-template
 
@@ -7,11 +8,14 @@ Un template de pipeline de données pour faire du Machine Learning (avec make). 
 ## Sommaire
 
 1.  [Vue d'ensemble du projet](#vue-densemble-du-projet)
-2.  [Guide d'installation de make](#guide-dinstallation-de-make)
-3.  [Utilisation du template](#utilisation-du-template)
-4.  [Configuration avec `params.yaml`](#configuration-avec-paramsyaml)
-5.  [Tests](#tests)
-6.  [Conteneurisation avec Docker](#conteneurisation-avec-docker)
+2.  [Structure du projet](#structure-du-projet)
+3.  [Guide d'installation de make](#guide-dinstallation-de-make)
+4.  [Utilisation du template](#utilisation-du-template)
+5.  [Configuration avec `params.yaml`](#configuration-avec-paramsyaml)
+6.  [Tests](#tests)
+7.  [Conteneurisation avec Docker](#conteneurisation-avec-docker)
+8.  [Licence](#licence)
+9.  [Contributions](#contributions)
 
 ## Vue d'ensemble du projet
 
@@ -26,6 +30,30 @@ Ce projet fournit un pipeline de Machine Learning structuré, orchestré par `ma
 Le `Makefile` définit les dépendances entre ces étapes, garantissant que chaque étape est exécutée dans le bon ordre et que seules les étapes nécessaires sont relancées lorsque les fichiers sources changent.
 
 Les paramètres du pipeline et du modèle sont gérés via le fichier `params.yaml`.
+
+## Structure du projet
+
+```
+.
+├── .github/workflows/ci.yml   # Workflow CI/CD pour l'intégration continue
+├── data/                        # Données (générées par le pipeline)
+├── reports/                     # Rapports d'évaluation (générés par le pipeline)
+├── src/                         # Scripts Python du pipeline
+│   ├── __init__.py
+│   ├── load_data.py
+│   ├── clean_data.py
+│   ├── preprocess_data.py
+│   ├── training.py
+│   └── evaluate.py
+├── tests/                       # Tests unitaires et d'intégration
+│   └── test_pipeline.py
+├── .gitignore                   # Fichiers et dossiers à ignorer par Git
+├── Dockerfile                   # Conteneurisation de l'application
+├── LICENSE                      # Licence du projet
+├── Makefile                     # Orchestration du pipeline
+├── params.yaml                  # Paramètres du projet
+└── requirements.txt             # Dépendances Python
+```
 
 ## Guide d'installation de make
 
@@ -113,38 +141,27 @@ Pour utiliser ce template, suivez les étapes ci-dessous :
 
 4.  **Exécuter le pipeline avec `make` :**
 
-    Assurez-vous que `make` est installé. Vous pouvez exécuter différentes étapes du pipeline :
+    Le `Makefile` inclut une commande `help` pour lister toutes les cibles disponibles :
+
+    ```bash
+    make help
+    ```
 
     *   **Exécuter le pipeline complet et évaluer le modèle :**
 
         ```bash
-        make evaluations
+        make all
         ```
 
-        Cette commande va exécuter toutes les étapes nécessaires : chargement des données, nettoyage, prétraitement, entraînement du modèle et évaluation.
+        Cette commande exécute toutes les étapes et génère les fichiers suivants :
+        - `reports/classification_report.txt`
+        - `reports/confusion_matrix.png`
+        - `model.pkl`
 
-    *   **Entraîner le modèle uniquement :**
-
-        ```bash
-        make model
-        ```
-
-    *   **Générer les données brutes :**
+    *   **Nettoyer les fichiers générés :**
 
         ```bash
-        make data/raw_dataset.csv
-        ```
-
-    *   **Nettoyer les données :**
-
-        ```bash
-        make data/clean_dataset.csv
-        ```
-
-    *   **Prétraiter les données :**
-
-        ```bash
-        make data/preprocessed_features.npz
+        make clean
         ```
 
 ## Configuration avec `params.yaml`
@@ -153,22 +170,39 @@ Le fichier `params.yaml` contient les paramètres configurables pour les différ
 
 ## Tests
 
-Le projet inclut des tests dans le répertoire `tests/`. Pour exécuter les tests, assurez-vous d'avoir installé `pytest` (inclus dans `requirements.txt`) et exécutez la commande suivante à la racine du projet :
+Le projet inclut des tests dans le répertoire `tests/`. Pour exécuter les tests, utilisez la commande `make` :
 
 ```bash
-pytest
+make tests
 ```
 
 ## Conteneurisation avec Docker
 
-Un `Dockerfile` est fourni pour conteneuriser l'application. Cela permet de créer un environnement reproductible pour le pipeline. Pour construire l'image Docker, exécutez la commande suivante à la racine du projet :
+Un `Dockerfile` est fourni pour conteneuriser l'application.
 
-```bash
-docker build -t ml-pipeline-template .
-```
+*   **Construire l'image Docker localement :**
 
-Une fois l'image construite, vous pouvez l'exécuter pour tester les évaluations :
+    ```bash
+    docker build -t ml-pipeline-template .
+    ```
 
-```bash
-docker run --rm ml-pipeline-template
-```
+*   **Utiliser l'image pré-construite depuis Docker Hub :**
+
+    ```bash
+    docker pull jslhostdocker/ml-pipeline-template:latest
+    ```
+
+*   **Exécuter le pipeline via Docker :**
+
+    ```bash
+    docker run --rm jslhostdocker/ml-pipeline-template:latest
+    ```
+
+## Licence
+
+Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) for plus de détails.
+
+## Contributions
+
+Les contributions sont les bienvenues ! N'hésitez pas à ouvrir une *issue* ou une *pull request*.
+
