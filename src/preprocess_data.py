@@ -21,11 +21,7 @@ def preprocess_data(params: dict):
     df = pd.read_csv(src)
     X = df.drop(target_column, axis=1)
 
-    numeric_transformer = Pipeline(
-        steps=[
-            ("scaler", StandardScaler()),
-        ]
-    )
+    numeric_transformer = Pipeline(steps=[("scaler", StandardScaler()),])
 
     categorical_transformer = Pipeline(
         steps=[("onehot", OneHotEncoder(handle_unknown="ignore"))]
@@ -45,10 +41,10 @@ def preprocess_data(params: dict):
     pipeline = Pipeline(steps=[("preprocessor", preprocessor)])
 
     X_preprocessed = pipeline.fit_transform(X)
-    
+
     with open(preprocessor_path, "wb") as f:
         dump(pipeline, f)
-        
+
     X_preprocessed_sparse = sparse.csr_matrix(X_preprocessed)
     sparse.save_npz(dest, X_preprocessed_sparse)
 
