@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 
 make evaluations
 cat reports/classification-report.txt
