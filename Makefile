@@ -2,7 +2,7 @@ SHELL := bash
 .ONESHELL:
 .SHELLFLAGS := -eu -o pipefail -c
 
-.PHONY: all clean data model evaluations tests help
+.PHONY: all clean model evaluations tests help
 
 all: evaluations
 
