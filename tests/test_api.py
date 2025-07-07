@@ -3,7 +3,7 @@ import os
 
 os.system("make evaluations")
 
-from app.api import app  # ton script principal (nom à adapter)
+from app.api import app  # noqa: E402
 
 client = TestClient(app)
 
