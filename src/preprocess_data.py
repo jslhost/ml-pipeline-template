@@ -21,7 +21,11 @@ def preprocess_data(params: dict):
     df = pd.read_csv(src)
     X = df.drop(target_column, axis=1)
 
-    numeric_transformer = Pipeline(steps=[("scaler", StandardScaler()),])
+    numeric_transformer = Pipeline(
+        steps=[
+            ("scaler", StandardScaler()),
+        ]
+    )
 
     categorical_transformer = Pipeline(
         steps=[("onehot", OneHotEncoder(handle_unknown="ignore"))]
