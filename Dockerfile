@@ -13,6 +13,12 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Copie tout le code source du projet dans le conteneur
 COPY . .
+
+# Remplace les fins de ligne CRLF vers LF (règle bug de permission)
+RUN apt-get update \
+  && apt-get install -y dos2unix \
+  && dos2unix /app/app/run.sh
+
 RUN chmod +x /app/app/run.sh
 
 # Commande par défaut pour exécuter le pipeline
