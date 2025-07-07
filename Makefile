@@ -65,4 +65,4 @@ tests:
 	PYTHONPATH=. pytest
 
 clean:
-	rm -rf data model.pkl reports
+	rm -rf data model.pkl  preprocessor.pkl reports

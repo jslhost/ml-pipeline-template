@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 
 from scipy import sparse
+from pickle import dump
 
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
@@ -14,6 +15,7 @@ def preprocess_data(params: dict):
     """Preprocess features and save them as a sparse matrix."""
     src = params["data"]["clean_dataset_path"]
     dest = params["data"]["preprocessed_features_path"]
+    preprocessor_path = params["model"]["preprocessor_path"]
     target_column = params["base"]["target_column"]
 
     df = pd.read_csv(src)
@@ -43,6 +45,10 @@ def preprocess_data(params: dict):
     pipeline = Pipeline(steps=[("preprocessor", preprocessor)])
 
     X_preprocessed = pipeline.fit_transform(X)
+    
+    with open(preprocessor_path, "wb") as f:
+        dump(pipeline, f)
+        
     X_preprocessed_sparse = sparse.csr_matrix(X_preprocessed)
     sparse.save_npz(dest, X_preprocessed_sparse)
 

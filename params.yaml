@@ -14,6 +14,7 @@ data:
 
 model:
   path: model.pkl
+  preprocessor_path: preprocessor.pkl
   # SVC parameters (example, can be expanded)
   # C: 1.0
   # kernel: rbf

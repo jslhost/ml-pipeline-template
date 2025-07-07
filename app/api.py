@@ -1,21 +1,39 @@
-"""A simple API to expose our trained RandomForest model for Tutanic survival."""
+"""A simple API to expose our trained model."""
 
 from fastapi import FastAPI
+from pydantic import BaseModel
 from pickle import load
 import pandas as pd
 from src.utils import load_params
 
 params = load_params()
 model_path = params["model"]["path"]
+preprocessor_path = params["model"]["preprocessor_path"]
 
 with open(model_path, "rb") as f:
     model = load(f)
 
+with open(preprocessor_path, "rb") as f:
+    preprocessor = load(f)
+
 app = FastAPI(
-    title="Prédiction de survie sur le Titanic",
-    description="Application de prédiction de survie sur le Titanic 🚢 <br>Une version par API pour faciliter la réutilisation du modèle 🚀"
-    + '<br><br><img src="https://media.vogue.fr/photos/5faac06d39c5194ff9752ec9/1:1/w_2404,h_2404,c_limit/076_CHL_126884.jpg" width="200">',
+    title="Prédiction de Churn",
+    description="Application de prédiction de Churn Churn 💸 <br>Une version par API pour faciliter la réutilisation du modèle 🚀",
 )
+
+
+class CustomerData(BaseModel):
+    Surname: str
+    CreditScore: int
+    Geography: str
+    Gender: str
+    Age: int
+    Tenure: int
+    Balance: float
+    NumOfProducts: int
+    HasCrCard: int
+    IsActiveMember: int
+    EstimatedSalary: float
 
 
 @app.get("/", tags=["Welcome"])
@@ -25,27 +43,21 @@ def show_welcome_page():
     """
 
     return {
-        "Message": "API de prédiction de survie sur le Titanic",
-        "Model_name": "Titanic ML",
+        "Message": "API de prédiction de Churn",
+        "Model_name": "Churn SVC",
         "Model_version": "0.1",
     }
 
 
-@app.get("/predict", tags=["Predict"])
-async def predict(
-    sex: str = "female", age: float = 29.0, fare: float = 16.5, embarked: str = "S"
-) -> str:
+@app.post("/predict", tags=["Predict"])
+async def predict(data: CustomerData) -> str:
     """ """
+    df = pd.DataFrame([data.dict()])
 
-    df = pd.DataFrame(
-        {
-            "Sex": [sex],
-            "Age": [age],
-            "Fare": [fare],
-            "Embarked": [embarked],
-        }
+    preprocessed_data = preprocessor.transform(df)
+
+    prediction = (
+        "Exited" if int(model.predict(preprocessed_data)) == 1 else "Not Exited"
     )
-
-    prediction = "Survived 🎉" if int(model.predict(df)) == 1 else "Dead ⚰️"
 
     return prediction
