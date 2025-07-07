@@ -13,6 +13,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Copie tout le code source du projet dans le conteneur
 COPY . .
+RUN chmod +x /app/run.sh
 
 # Commande par défaut pour exécuter le pipeline
 # CMD ["sh", "-c", "make evaluations ; cat reports/classification-report.txt"] - ancienne version
