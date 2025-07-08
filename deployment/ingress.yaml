@@ -1,0 +1,39 @@
+# deployment/ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: churn-ingress
+  namespace: default # ou votre namespace
+  annotations:
+    # 1) Spécifie qu’on veut un ALB Internet-facing (ou "internal" si privé)
+    alb.ingress.kubernetes.io/scheme: internet-facing
+
+    # 2) Classe d’ingress à utiliser
+    kubernetes.io/ingress.class: alb
+    ingressClassName: alb
+
+    # 3) (Optionnel) règles de routage avancées
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/healthcheck-path: /
+    alb.ingress.kubernetes.io/healthcheck-port: "80"
+
+    # 4) TLS via ACM : référez ici l’ARN de votre certificat dans ACM
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:<region>:<account-id>:certificate/<cert-id>
+spec:
+  # 5) On crée un listener HTTPS sur le 443
+  tls:
+    - hosts:
+        - churn.lab.sspcloud.fr
+      secretName: dummy-secret # <-- n’est pas utilisé par ALB Controller, mais requis par la spec
+
+  rules:
+    - host: churn.lab.sspcloud.fr
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: churn-service
+                port:
+                  number: 80

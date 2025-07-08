@@ -1,0 +1,22 @@
+#| filename: "deployment/deployment.yaml"
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: churn-deployment
+  labels:
+    app: churn-ml
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: churn-ml
+  template:
+    metadata:
+      labels:
+        app: churn-ml
+    spec:
+      containers:
+        - name: churn-ml
+          image: jslhostdocker/ml-pipeline-template:latest
+          ports:
+            - containerPort: 8000
