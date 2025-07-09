@@ -3,6 +3,7 @@ project:
 
 website:
   title: "ml-churn"
+  site-url: https://jslhost.github.io/ml-pipeline-template/
   navbar:
     left:
       - href: index.qmd
