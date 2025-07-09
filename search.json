@@ -1,0 +1,23 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Prédiction de Churn Bancaire",
+    "section": "",
+    "text": "Ce document interactif vous permet d’utiliser notre modèle de prédiction de churn. Remplissez les informations du client ci-dessous pour savoir s’il est susceptible de quitter la banque."
+  },
+  {
+    "objectID": "index.html#informations-du-client",
+    "href": "index.html#informations-du-client",
+    "title": "Prédiction de Churn Bancaire",
+    "section": "Informations du client",
+    "text": "Informations du client\n\nviewof creditScore = Inputs.range([300, 850], {step: 1, value: 650, label: \"Credit Score\"})\n\n\n\n\n\n\n\nviewof geography = Inputs.radio([\"France\", \"Spain\", \"Germany\"], {value: \"France\", label: \"Pays\"})\n\n\n\n\n\n\n\nviewof gender = Inputs.radio([\"Male\", \"Female\"], {value: \"Male\", label: \"Genre\"})\n\n\n\n\n\n\n\nviewof age = Inputs.range([18, 100], {step: 1, value: 32, label: \"Âge\"})\n\n\n\n\n\n\n\nviewof tenure = Inputs.range([0, 10], {step: 1, value: 2, label: \"Ancienneté (années)\"})\n\n\n\n\n\n\n\nviewof balance = Inputs.range([0, 250000], {step: 1000, value: 22000, label: \"Solde du compte\"})\n\n\n\n\n\n\n\nviewof numOfProducts = Inputs.range([1, 4], {step: 1, value: 1, label: \"Nombre de produits\"})\n\n\n\n\n\n\n\nviewof hasCrCard = Inputs.toggle({label: \"Possède une carte de crédit ?\", value: true})\n\n\n\n\n\n\n\nviewof isActiveMember = Inputs.toggle({label: \"Membre actif ?\", value: true})\n\n\n\n\n\n\n\nviewof estimatedSalary = Inputs.range([0, 200000], {step: 1000, value: 50000, label: \"Salaire estimé\"})\n\n\n\n\n\n\n\n\n// Utilisation de Bootstrap si présent\nviewof predictButton = Inputs.button(\"Lancer la prédiction\", {\n  className: \"btn btn-primary\",\n  style: { margin: \"4px 2px\" }\n})"
+  },
+  {
+    "objectID": "index.html#prédiction-de-notre-modèle",
+    "href": "index.html#prédiction-de-notre-modèle",
+    "title": "Prédiction de Churn Bancaire",
+    "section": "Prédiction de notre modèle",
+    "text": "Prédiction de notre modèle\n\nasync function getPrediction(creditScore, geography, gender, age, tenure, balance, numOfProducts, hasCrCard, isActiveMember, estimatedSalary) {\n  const payload = {\n    Surname: \"michel\",\n    CreditScore: creditScore,\n    Geography: geography,\n    Gender: gender,\n    Age: age,\n    Tenure: tenure,\n    Balance: parseFloat(balance),\n    NumOfProducts: numOfProducts,\n    HasCrCard: hasCrCard ? 1 : 0,\n    IsActiveMember: isActiveMember ? 1 : 0,\n    EstimatedSalary: parseFloat(estimatedSalary)\n  };\n  const response = await fetch('http://k8s-default-churning-c145116797-1941479634.us-east-1.elb.amazonaws.com/predict', {\n    method: 'POST',\n    mode: 'cors',\n    headers: { 'Content-Type': 'application/json' },\n    body: JSON.stringify(payload)\n  });\n  if (!response.ok) throw new Error(`HTTP ${response.status}`);\n  return response.json();\n}\n\n\n\n\n\n\n\nresult = {\n  predictButton;\n  if (predictButton === 0) {\n    return md`Cliquez sur 'Lancer la prediction' pour obtenir un resultat.`;\n  }\n  try {\n    const data = await getPrediction(\n      creditScore, geography, gender, age, tenure,\n      balance, numOfProducts, hasCrCard,\n      isActiveMember, estimatedSalary\n    );\n    return md`\n__Prediction de notre modele__ :  \n\n\\`\\`\\`json\n${JSON.stringify(data, null, 2)}\n\\`\\`\\``;\n  } catch (err) {\n    console.error(err);\n    return md`⚠️ Erreur lors de la prediction : ${err.message}`;\n  }\n}"
+  }
+]
