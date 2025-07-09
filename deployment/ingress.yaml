@@ -17,18 +17,11 @@ metadata:
     alb.ingress.kubernetes.io/healthcheck-path: /
     alb.ingress.kubernetes.io/healthcheck-port: "80"
 
-    # 4) TLS via ACM : référez ici l’ARN de votre certificat dans ACM
-    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:<region>:<account-id>:certificate/<cert-id>
 spec:
-  # 5) On crée un listener HTTPS sur le 443
-  tls:
-    - hosts:
-        - churn.lab.sspcloud.fr
-      secretName: dummy-secret # <-- n’est pas utilisé par ALB Controller, mais requis par la spec
-
+  # Pas de TLS ni de host spécifique.
+  # L'ALB répondra sur son IP/DNS public avec du trafic HTTP.
   rules:
-    - host: churn.lab.sspcloud.fr
-      http:
+    - http:
         paths:
           - path: /
             pathType: Prefix
