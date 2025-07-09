@@ -5,6 +5,8 @@
 
 Un template de pipeline de données pour faire du Machine Learning (avec make). Ce template est orienté pour la classification mais peut facilement être adapté à la régression.
 
+Une version en ligne du pipeline est disponible [ici](https://jslhost.github.io/ml-pipeline-template/) (l'API peut être momentanément indisponible).
+
 ## Sommaire
 
 1.  [Vue d'ensemble du projet](#vue-densemble-du-projet)
@@ -205,4 +207,6 @@ Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) for plus de d
 ## Contributions
 
 Les contributions sont les bienvenues ! N'hésitez pas à ouvrir une *issue* ou une *pull request*.
+
+
 
