@@ -5,6 +5,8 @@ from pydantic import BaseModel
 from pickle import load
 import pandas as pd
 from src.utils import load_params
+from fastapi.middleware.cors import CORSMiddleware
+
 
 params = load_params()
 model_path = params["model"]["path"]
@@ -34,6 +36,15 @@ class CustomerData(BaseModel):
     HasCrCard: int
     IsActiveMember: int
     EstimatedSalary: float
+
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 @app.get("/", tags=["Welcome"])

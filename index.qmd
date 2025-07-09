@@ -1,0 +1,115 @@
+---
+title: "Prédiction de Churn Bancaire"
+echo: false
+---
+
+Ce document interactif vous permet d'utiliser notre modèle de prédiction de churn. Remplissez les informations du client ci-dessous pour savoir s'il est susceptible de quitter la banque.
+
+## Informations du client
+
+```{ojs}
+viewof creditScore = Inputs.range([300, 850], {step: 1, value: 650, label: "Credit Score"})
+```
+
+```{ojs}
+viewof geography = Inputs.radio(["France", "Spain", "Germany"], {value: "France", label: "Pays"})
+```
+
+```{ojs}
+viewof gender = Inputs.radio(["Male", "Female"], {value: "Male", label: "Genre"})
+```
+
+```{ojs}
+viewof age = Inputs.range([18, 100], {step: 1, value: 32, label: "Âge"})
+```
+
+```{ojs}
+viewof tenure = Inputs.range([0, 10], {step: 1, value: 2, label: "Ancienneté (années)"})
+```
+
+```{ojs}
+viewof balance = Inputs.range([0, 250000], {step: 1000, value: 22000, label: "Solde du compte"})
+```
+
+```{ojs}
+viewof numOfProducts = Inputs.range([1, 4], {step: 1, value: 1, label: "Nombre de produits"})
+```
+
+```{ojs}
+viewof hasCrCard = Inputs.toggle({label: "Possède une carte de crédit ?", value: true})
+```
+
+```{ojs}
+viewof isActiveMember = Inputs.toggle({label: "Membre actif ?", value: true})
+```
+
+```{ojs}
+viewof estimatedSalary = Inputs.range([0, 200000], {step: 1000, value: 50000, label: "Salaire estimé"})
+```
+
+<br>
+
+```{ojs}
+// Utilisation de Bootstrap si présent
+viewof predictButton = Inputs.button("Lancer la prédiction", {
+  className: "btn btn-primary",
+  style: { margin: "4px 2px" }
+})
+```
+
+## Prédiction de notre modèle
+
+```{ojs}
+async function getPrediction(creditScore, geography, gender, age, tenure, balance, numOfProducts, hasCrCard, isActiveMember, estimatedSalary) {
+  const payload = {
+    Surname: "michel",
+    CreditScore: creditScore,
+    Geography: geography,
+    Gender: gender,
+    Age: age,
+    Tenure: tenure,
+    Balance: parseFloat(balance),
+    NumOfProducts: numOfProducts,
+    HasCrCard: hasCrCard ? 1 : 0,
+    IsActiveMember: isActiveMember ? 1 : 0,
+    EstimatedSalary: parseFloat(estimatedSalary)
+  };
+  const response = await fetch('http://k8s-default-churning-c145116797-1941479634.us-east-1.elb.amazonaws.com/predict', {
+    method: 'POST',
+    mode: 'cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  });
+  if (!response.ok) throw new Error(`HTTP ${response.status}`);
+  return response.json();
+}
+
+```
+
+```{ojs}
+result = {
+  predictButton;
+  if (predictButton === 0) {
+    return md`Cliquez sur 'Lancer la prediction' pour obtenir un resultat.`;
+  }
+  try {
+    const data = await getPrediction(
+      creditScore, geography, gender, age, tenure,
+      balance, numOfProducts, hasCrCard,
+      isActiveMember, estimatedSalary
+    );
+    return md`
+__Prediction de notre modele__ :  
+
+\`\`\`json
+${JSON.stringify(data, null, 2)}
+\`\`\``;
+  } catch (err) {
+    console.error(err);
+    return md`⚠️ Erreur lors de la prediction : ${err.message}`;
+  }
+}
+
+```
+
+<!-- NB : assurez-vous côté serveur d'ajouter l'en-tête CORS : Access-Control-Allow-Origin: * -->
