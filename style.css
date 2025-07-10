@@ -1,0 +1,15 @@
+/*
+ On cible spécifiquement .btn-primary pour surcharger Bootstrap
+ et on utilise !important pour forcer la priorité.
+*/
+.btn-primary {
+    background-color: transparent !important;
+    border: 1px solid grey !important;
+    color: grey !important;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover, .btn-primary:active {
+    background-color: grey !important;
+    color: white !important;
+}

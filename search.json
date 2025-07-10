@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Prédiction de Churn Bancaire",
     "section": "",
-    "text": "Ce document interactif vous permet d’utiliser notre modèle de prédiction de churn. Remplissez les informations du client ci-dessous pour savoir s’il est susceptible de quitter la banque."
+    "text": "Cette page vous permet d’utiliser notre modèle de prédiction de churn. Remplissez les informations du client ci-dessous pour savoir s’il est susceptible de quitter la banque."
   },
   {
     "objectID": "index.html#informations-du-client",
