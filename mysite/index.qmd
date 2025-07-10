@@ -55,8 +55,8 @@ viewof estimatedSalary = Inputs.range([0, 200000], {step: 1000, value: 50000, la
 ```{ojs}
 // Utilisation de Bootstrap si présent
 viewof predictButton = Inputs.button("Lancer la prédiction", {
-  className: "btn btn-primary",
-  style: "margin: 4px 2px; color: white !important;"
+  className: "btn btn-primary text-white",
+  style: "margin: 4px 2px;"
 })
 ```
 

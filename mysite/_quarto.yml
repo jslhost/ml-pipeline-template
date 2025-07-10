@@ -11,4 +11,5 @@ website:
 
 format:
   html:
+    theme: cerulean
     css: style.css
