@@ -5,7 +5,7 @@
 .btn-primary {
     background-color: transparent !important;
     border: 1px solid grey !important;
-    color: grey !important;
+    color: white !important;
     transition: all 0.3s ease;
 }
 
