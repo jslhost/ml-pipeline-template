@@ -3,6 +3,7 @@
  et on utilise !important pour forcer la priorité.
 */
 .btn-primary {
+    --bs-btn-color: white;
     background-color: transparent !important;
     border: 1px solid grey !important;
     color: white !important;
