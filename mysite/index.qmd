@@ -1,9 +1,12 @@
 ---
 title: "Prédiction de Churn Bancaire"
 echo: false
+format: 
+  html:
+    css: style.css
 ---
 
-Ce document interactif vous permet d'utiliser notre modèle de prédiction de churn. Remplissez les informations du client ci-dessous pour savoir s'il est susceptible de quitter la banque.
+Cette page vous permet d'utiliser notre modèle de prédiction de churn. Remplissez les informations du client ci-dessous pour savoir s'il est susceptible de quitter la banque.
 
 ## Informations du client
 
