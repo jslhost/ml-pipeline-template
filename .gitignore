@@ -163,6 +163,7 @@ cython_debug/
 
 # Machine Learning models
 model.pkl
+preprocessor.pkl
 
 # Quarto
 /.quarto/
