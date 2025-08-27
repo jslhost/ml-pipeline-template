@@ -1,5 +1,5 @@
 # Utilise une image Python 3.9 comme base
-FROM python:3.9-slim-buster
+FROM python:3.11-slim-bookworm
 
 # Définit le répertoire de travail dans le conteneur
 WORKDIR /app
