@@ -3,7 +3,7 @@ from src.utils import load_params
 
 
 def load_data(params: dict):
-    """Load the dataset from ``src`` and save it to ``dest``.
+    """Load the dataset from ``src`` and save it to ``data``.
 
     Parameters
     ----------
