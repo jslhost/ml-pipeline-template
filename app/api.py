@@ -63,7 +63,7 @@ def show_welcome_page():
 @app.post("/predict", tags=["Predict"])
 async def predict(data: CustomerData) -> str:
     """ """
-    df = pd.DataFrame([data.dict()])
+    df = pd.DataFrame([data.model_dump()])
 
     preprocessed_data = preprocessor.transform(df)
 

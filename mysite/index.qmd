@@ -77,7 +77,7 @@ async function getPrediction(creditScore, geography, gender, age, tenure, balanc
     IsActiveMember: isActiveMember ? 1 : 0,
     EstimatedSalary: parseFloat(estimatedSalary)
   };
-  const response = await fetch('http://k8s-default-churning-c145116797-1941479634.us-east-1.elb.amazonaws.com/predict', {
+  const response = await fetch('http://a9c25f299dcfd40b4be3064beac6311b-225310801.us-east-1.elb.amazonaws.com/predict', {
     method: 'POST',
     mode: 'cors',
     headers: { 'Content-Type': 'application/json' },
