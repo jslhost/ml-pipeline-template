@@ -23,4 +23,5 @@ RUN chmod +x /app/app/run.sh
 
 # Commande par défaut pour exécuter le pipeline
 # CMD ["sh", "-c", "make evaluations ; cat reports/classification-report.txt"] - ancienne version
+# CMD ["uvicorn", "app.api:app", "--host", "0.0.0.0", "--port", "8000"]
 CMD ["bash", "-c", "./app/run.sh"]
