@@ -51,6 +51,7 @@ def evaluate(params: dict):
         svc = load(f)
 
     y_test_pred = svc.predict(X_test)
+    y_test_probas = svc.predict_proba(X_test)
 
     clf_report = classification_report(y_test, y_test_pred)
 

@@ -1,0 +1,23 @@
+program: src/wandb_experiment.py
+method: random
+metric:
+  name: accuracy/test
+  goal: maximize
+parameters:
+  C:
+    distribution: log_uniform_values
+    min: 0.01
+    max: 10
+  kernel:
+    values: ["linear", "rbf"]
+  gamma:
+    values: ["scale", "auto"]
+  probability:
+    values: [true]
+command:
+  - ${env}
+  - C:\Users\jeans\Desktop\ml_pipeline_with_make\ml_pipeline_env\Scripts\python.exe
+  - -u
+  - -m
+  - src.wandb_experiment
+  - ${args}

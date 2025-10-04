@@ -165,6 +165,12 @@ cython_debug/
 model.pkl
 preprocessor.pkl
 
+# Data
+data/
+reports/
+wandb/
+artifacts/
+
 # Quarto
 /.quarto/
 *.html
