@@ -1,0 +1,106 @@
+_wandb:
+    value:
+        cli_version: 0.22.1
+        e:
+            qi6xdak2niuku3zq7njwow1c6gpzxbxq:
+                args:
+                    - --C=0.8599984944536729
+                    - --gamma=scale
+                    - --kernel=rbf
+                    - --probability=True
+                cpu_count: 6
+                cpu_count_logical: 6
+                disk:
+                    /:
+                        total: "254721126400"
+                        used: "230728609792"
+                email: jean.si@hotmail.fr
+                executable: C:\Users\jeans\Desktop\ml_pipeline_with_make\ml_pipeline_env\Scripts\python.exe
+                git:
+                    commit: 62c7134d51a9ff35e7ab53c2b1e74f410dff2082
+                    remote: git@github.com:jslhost/ml_pipeline_template.git
+                host: LAPTOP-258PBA4J
+                memory:
+                    total: "7899242496"
+                os: Windows-11-10.0.26100-SP0
+                program: -m src.wandb_experiment
+                python: CPython 3.12.4
+                root: C:\Users\jeans\Desktop\ml_pipeline_with_make\ml_pipeline_template
+                startedAt: "2025-10-04T09:57:39.429033Z"
+                writerId: qi6xdak2niuku3zq7njwow1c6gpzxbxq
+        m: []
+        python_version: 3.12.4
+        t:
+            "1":
+                - 5
+                - 53
+            "2":
+                - 5
+                - 53
+            "3":
+                - 2
+                - 14
+            "4": 3.12.4
+            "5": 0.22.1
+            "8":
+                - 3
+            "12": 0.22.1
+            "13": windows-amd64
+        visualize:
+            roc:
+                panel_config:
+                    fieldSettings:
+                        class: class
+                        x: fpr
+                        "y": tpr
+                    panelDefId: wandb/area-under-curve/v0
+                    stringSettings:
+                        title: ROC Curve
+                        x-axis-title: False positive rate
+                        y-axis-title: True positive rate
+                    transform:
+                        name: tableWithLeafColNames
+                    userQuery:
+                        queryFields:
+                            - args:
+                                - name: runSets
+                                  value: ${runSets}
+                              fields:
+                                - fields: []
+                                  name: id
+                                - fields: []
+                                  name: name
+                                - fields: []
+                                  name: _defaultColorIndex
+                                - args:
+                                    - name: tableKey
+                                      value: roc_table
+                                  fields: []
+                                  name: summaryTable
+                              name: runSets
+                panel_type: Vega2
+        viz:
+            confusion_matrix:
+                historyFieldSettings:
+                    key: confusion_matrix
+                    x-axis: _step
+                id: wandb/confusion_matrix/v1
+            learning_curve:
+                historyFieldSettings:
+                    key: learning_curve
+                    x-axis: _step
+                id: wandb/learning_curve/v1
+C:
+    value: 0.8599984944536729
+gamma:
+    value: scale
+kernel:
+    value: rbf
+probability:
+    value: true
+test_len:
+    value: 2000
+test_size:
+    value: 0.2
+train_len:
+    value: 8000

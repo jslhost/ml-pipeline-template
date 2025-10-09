@@ -1,0 +1,10 @@
+wandb_version: 1
+
+C:
+  value: 0.06708188707312016
+gamma:
+  value: auto
+kernel:
+  value: rbf
+probability:
+  value: true

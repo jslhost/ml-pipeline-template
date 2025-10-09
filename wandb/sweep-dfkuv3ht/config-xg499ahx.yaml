@@ -1,0 +1,10 @@
+wandb_version: 1
+
+C:
+  value: 0.19213502609421643
+gamma:
+  value: scale
+kernel:
+  value: linear
+probability:
+  value: true

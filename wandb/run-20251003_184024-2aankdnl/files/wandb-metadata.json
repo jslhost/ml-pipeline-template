@@ -1,0 +1,26 @@
+{
+  "os": "Windows-10-10.0.26100-SP0",
+  "python": "CPython 3.8.8",
+  "startedAt": "2025-10-03T16:40:24.942245Z",
+  "program": "-m src.wandb_experiment",
+  "git": {
+    "remote": "git@github.com:jslhost/ml_pipeline_template.git",
+    "commit": "62c7134d51a9ff35e7ab53c2b1e74f410dff2082"
+  },
+  "email": "jean.si@hotmail.fr",
+  "root": "C:\\Users\\jeans\\Desktop\\ml_pipeline_with_make\\ml_pipeline_template",
+  "host": "LAPTOP-258PBA4J",
+  "executable": "C:\\Users\\jeans\\Desktop\\ml_pipeline_with_make\\ml_pipeline_env\\Scripts\\python.exe",
+  "cpu_count": 6,
+  "cpu_count_logical": 6,
+  "disk": {
+    "/": {
+      "total": "254721126400",
+      "used": "235290034176"
+    }
+  },
+  "memory": {
+    "total": "7899242496"
+  },
+  "writerId": "nswcp4hdc6ly72dij0gpbie37s774v0u"
+}

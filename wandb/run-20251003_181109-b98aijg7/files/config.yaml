@@ -1,0 +1,72 @@
+_wandb:
+    value:
+        cli_version: 0.22.1
+        e:
+            yrl5gmee3l97e0mskthgi3fyager5j3i:
+                cpu_count: 6
+                cpu_count_logical: 6
+                disk:
+                    /:
+                        total: "254721126400"
+                        used: "235229245440"
+                email: jean.si@hotmail.fr
+                executable: C:\Users\jeans\Desktop\ml_pipeline_with_make\ml_pipeline_env\Scripts\python.exe
+                git:
+                    commit: 62c7134d51a9ff35e7ab53c2b1e74f410dff2082
+                    remote: git@github.com:jslhost/ml_pipeline_template.git
+                host: LAPTOP-258PBA4J
+                memory:
+                    total: "7899242496"
+                os: Windows-10-10.0.26100-SP0
+                program: -m src.wandb_experiment
+                python: CPython 3.8.8
+                root: C:\Users\jeans\Desktop\ml_pipeline_with_make\ml_pipeline_template
+                startedAt: "2025-10-03T16:11:09.746930Z"
+                writerId: yrl5gmee3l97e0mskthgi3fyager5j3i
+        m: []
+        python_version: 3.8.8
+        t:
+            "1":
+                - 5
+                - 53
+            "2":
+                - 5
+                - 53
+            "3":
+                - 16
+            "4": 3.8.8
+            "5": 0.22.1
+            "8":
+                - 3
+            "12": 0.22.1
+            "13": windows-amd64
+C:
+    value: 1
+break_ties:
+    value: false
+cache_size:
+    value: 200
+class_weight:
+    value: null
+coef0:
+    value: 0
+decision_function_shape:
+    value: ovr
+degree:
+    value: 3
+gamma:
+    value: scale
+kernel:
+    value: rbf
+max_iter:
+    value: -1
+probability:
+    value: false
+random_state:
+    value: null
+shrinking:
+    value: true
+tol:
+    value: 0.001
+verbose:
+    value: false
